@@ -1,0 +1,50 @@
+doctype html
+html(lang='en-GB')
+  head
+    meta(charset='UTF-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=Edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    meta(name='author', content='Ankit Bhimani')
+    title AngularJS – ngStorage Demo
+    link(type='text/css', rel='stylesheet', media='all', href='/styles.app-styles.css')
+    block pre
+  body(ng-app='ngStorageDemo')
+    #wrapper_main(data-role='page', ng-controller='ctrlMainNav')
+      #wrap_head(data-role='header')
+        #right_wrap
+          #msgBox.red.success.bold
+      #wrap_content(data-role='content', ng-view)
+        block content
+    #wrapper_menu.wrap_menu.nojs.quattro
+      #menu_toggler
+      #env_menu
+        ul#menu.menu.nav
+          li.logon
+            a.spread(href='/phonebook') Phonebook
+          li
+            a.spread(href='/pages/about.html') About
+          li
+            a.spread(href='/pages/documentation.html') Documentation
+    script(type='text/javascript', src='/js.lib.jquery.min.js')
+    script(type='text/javascript', src='/js.lib.angular.min.js')
+    script(type='text/javascript', src='/js.lib.angular-route.min.js')
+    script(type='text/javascript', src='/js.lib.ngstorage.min.js')
+    script(type='text/javascript').
+        var getIE=(window.getIE||{});getIE=function(){var f=-1;if(navigator.appName=="Microsoft Internet Explorer"){var e=navigator.userAgent;var d=new RegExp("MSIE ([0-9]{1,}[.0-9]{0,})");f=(d.exec(e))?parseFloat(RegExp.$1):f}f=parseInt(f);this.getVer=function(){return f};this.checkVer=function(a){if(f>0&&f==a){return true}return false};this.lowVer=function(a){if(f>0&&f<=a){return true}return false};return f};var isIE=new getIE();var mdd_open=function(b){window.location=b};var mdd_popup=function(b){window.open(b,"Untitled","status=1, toolbar=0, location=0, menubar=0, resizable=0, width="+screen.width+", height="+screen.height+", scrollbars=1")};var getParameterByName=function(a,c){try{var d=(RegExp("[?&]"+a.replace(/[\[]/,"\\[").replace(/[\]]/,"\\]")+"=([^&]*)").exec(c?("?"+c):window.location.search));return(d&&decodeURIComponent(d[1].replace(/\+/g," ")))}catch(b){}};var preload=function(b){$(b).each(function(){(new Image()).src="/img."+this})};var HAS_ONLOAD_HAPPENED=false;var addLoadEvent;window.onload=function(){HAS_ONLOAD_HAPPENED=true};addLoadEvent=function(script,params,post){if(typeof(script)=="function"){if(post){var oldOnload=window.onload;window.onload=function(){if(oldOnload){try{oldOnload();script()}catch(ex){}}else{window.onload=script}}}else{$(document).ready(function(){script()})}}else{if(typeof(script)=="string"){var attachScript=function(){var head0=document.getElementsByTagName("body")[0];var elScript=document.createElement("script");var isLoaded=false;elScript.type="text/javascript";elScript.language="javascript";elScript.src=("/scriptcalls."+script+".pack.js");params=(params?params:null);if(params){$(elScript).attr("id",("jsAtt-"+script)).attr("data-params",params)}$(elScript).one("load",function(){isLoaded=true});$(elScript).load();while(!isLoaded){if($(elScript).prop("complete")){isLoaded=true}}head0.appendChild(elScript)};if(post){addLoadEvent(function(){attachScript()})}else{attachScript()}}else{try{eval(script)}catch(ex){}}}if(HAS_ONLOAD_HAPPENED){window.onload()}};
+        var CSSS_NOJS='nojs';
+        var TOUT_LOAD=200;
+        var TMRT_ANIM=360;
+        var $trim;
+        var BASE_APP=angular.module('ngStorageDemo', ['ngStorage']);
+        var isTableLoaded=false,
+        //EXT: JQUERY
+        $trim=$.trim;
+        $.trim=(function(str){return ($trim(str).replace(/\s{2,}/g, ' '));});
+        $.ajaxSetup({cache:false});
+        $(document).ready(function(){$('div#msgBox').html($('div#msgBox').html().replace(/\\n/g, '<br />'));});
+        //TRIGGER
+        window.addLoadEvent('main1', null, true);
+    script(type='text/javascript', src='/scriptcalls.ng-mnav.js')
+    block postscripts
+
+

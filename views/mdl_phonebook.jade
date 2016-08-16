@@ -1,0 +1,17 @@
+extends tpl_main
+
+block pre
+    link(type='text/css', rel='stylesheet', media='all', href='/styles.jquery-ui.datepicker.min.css')
+
+block content
+    #content(ng-controller='ctrlPhonebook')
+        phonebook-table
+        phonebook-data
+
+block postscripts
+    script(type='text/javascript', src='/js.ext.jquery.ui.datepicker.js')
+    script(type='text/javascript').
+        window.addLoadEvent('phonebook1', null, true);
+    script(type='text/javascript', src='/scriptcalls.ng-phonebook.js')
+
+

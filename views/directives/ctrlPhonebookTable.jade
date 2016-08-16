@@ -1,0 +1,42 @@
+table#tblx.raw(ng-show='toggleForm')
+  thead
+    tr
+        th(colspan='7')
+            h4.text-center Phonebook
+                a.button.right(type='submit', ng-click='enterAdd()') Add
+    tr.static
+        th.sortable(ng-click='orderByField=\'id\';reverseSort=!reverseSort') ID
+        th.sortable(ng-click='orderByField=\'name\';reverseSort=!reverseSort') Full Name
+        th.sortable(ng-click='orderByField=\'phone\';reverseSort=!reverseSort') Phone
+        th.sortable(ng-click='orderByField=\'email\';reverseSort=!reverseSort') Email
+        th.sortable(ng-click='orderByField=\'birthday\';reverseSort=!reverseSort') Birth Date
+        th &nbsp;
+        th &nbsp;
+  tbody#loadData(ng-init='init()')
+    tr(ng-show='$contactsStore.phonebook==null')
+        td.red.text-center(colspan='7') loading...
+    tr(ng-repeat='contact in $contactsStore.phonebook | orderBy:orderByField:reverseSort')
+        td {{contact.id}}
+        td
+            img(src='{{contact.avatar}}', ng-show='contact.avatar', class='thumb-small', ng-click='fetch(contact.id, true)')  
+            a(ng-click='fetch(contact.id, true)') {{contact.name}}
+        td.title {{contact.phone}}
+        td.title
+            a(href='mailto:{{contact.email}}', target='_blank') {{contact.email}}
+        td.title {{contact.birthday}}
+        td
+            a.img-button.edit(title='Edit', ng-click='fetch(contact.id)')
+        td
+            a.img-button.delete(title='Delete', ng-click='remove(contact.id)')
+  tfoot
+    tr
+        td(colspan='7')
+            | (
+            span#spnCount.bold {{$contactsStore.phonebook.length? $contactsStore.phonebook.length: 0}}
+            | ) record(s) found.
+            div.right
+                span.small-text Last Synced : 
+                span#SyncStamp.small-text.red {{$contactsMeta.last_synced || '&mdash;'}}
+                | 
+                a.button(type='submit', ng-click='requestSync($event)') Sync
+

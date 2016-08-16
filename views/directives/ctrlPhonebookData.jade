@@ -1,0 +1,41 @@
+form#x(name='frmX', novalidate, ng-submit='frmX.$valid', ng-hide='toggleForm')
+    table#tbly.raw
+      tbody
+        tr(ng-show='$contactsCurr.id>0')
+            th ID
+            td {{$contactsCurr.id}}
+        tr(ng-show='$contactsCurr.id>0 && $contactsCurr.avatar')
+            th Photo
+            td.title
+                img(src='{{$contactsCurr.avatar}}', class='thumb-big')
+        tr
+            th Name
+            td.title
+                input(type='text', name='txtName', ng-model='$contactsCurr.name', required, minlength='2', maxlength='255', ng-disabled='viewOnly', focus)
+        tr
+            th Phone
+            td
+                input.numeric(type='text', name='txtPhone', ng-model='phone', required, minlength='10', maxlength='10', ng-keyup='applyPhoneNumber($event)', ng-hide='viewOnly', ng-disabled='viewOnly')
+                input(type='text', name='txtPhone', ng-model='$contactsCurr.phone', required, minlength='14', maxlength='14', ng-show='viewOnly', ng-disabled='viewOnly')
+        tr
+            th Email
+            td.title
+                input(type='email', ng-model='$contactsCurr.email', required, maxlength='255', ng-readonly='$contactsCurr.id>0', ng-keyup='checkUniqueContact($event)', ng-hide='viewOnly') 
+                a(href='mailto:{{$contactsCurr.email}}', target='_blank', class='input', ng-show='viewOnly') {{$contactsCurr.email}} 
+                span.red(ng-show='!viewOnly && invalidEmail')
+                    |  Email already taken.
+        tr
+            th Birth Date
+            td.title
+                input.dob(type='text', id='txtDOB', ng-model='$contactsCurr.birthday', required, maxlength='10', readonly, ng-disabled='viewOnly')
+        tr
+            td(colspan='2')
+                input(type='submit', value='save', ng-hide='viewOnly', ng-disabled='frmX.$invalid', ng-click='$contactsCurr.id>0? update($contactsCurr.id): add()')
+                span(ng-hide='viewOnly') | &nbsp;
+                input(type='button', value='edit', ng-show='viewOnly', ng-click='fetch($contactsCurr.id)')
+                span(ng-show='viewOnly') | &nbsp;
+                input(type='button', value='delete', ng-show='$contactsCurr.id>0', class='red', ng-click='remove($contactsCurr.id)')
+                span(ng-show='$contactsCurr.id>0') | &nbsp;
+                input(type='button', value='cancel', ng-click='init()')
+
+
